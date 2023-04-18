@@ -1,15 +1,17 @@
 plugins {
-    kotlin("android") version "1.7.10"
-    kotlin("kapt") version "1.7.10"
-    id("com.android.application") version "7.3.0"
-    id("dagger.hilt.android.plugin") version "2.43.2"
-    id("de.mannodermaus.android-junit5") version "1.8.0.0"
+    kotlin("android") version "1.8.20"
+    kotlin("kapt") version "1.8.20"
+    id("com.android.application") version "8.0.0"
+    id("dagger.hilt.android.plugin") version "2.45"
+    id("de.mannodermaus.android-junit5") version "1.8.2.1"
 }
 
-val compose = "1.3.0-rc01"
+val compose = "1.4.1"
+val composeCompilerVersion = "1.4.5"
 
 android {
 
+    namespace = "com.futuremind.loyaltyrewards"
     compileSdk = 33
 
     defaultConfig {
@@ -21,12 +23,18 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
-
-    kotlinOptions { jvmTarget = "1.8" }
-    composeOptions { kotlinCompilerExtensionVersion = compose }
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(11))
+        }
+    }
+    kotlin {
+        jvmToolchain(11)
+    }
+    composeOptions { kotlinCompilerExtensionVersion = composeCompilerVersion }
 
     buildFeatures {
         compose = true
@@ -37,8 +45,8 @@ android {
 dependencies {
 
     val coroutines = "1.6.4"
-    val accompanist = "0.26.5-rc"
-    val junit5 = "5.8.0"
+    val accompanist = "0.30.1"
+    val junit5 = "5.9.2"
 
     implementation(files("libs/mockapi.jar"))
 
@@ -47,23 +55,23 @@ dependencies {
     implementation("androidx.compose.ui", "ui-tooling", compose)
     implementation("androidx.compose.foundation", "foundation", compose)
     implementation("androidx.compose.material", "material", compose)
-    implementation("androidx.activity:activity-compose:1.6.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+    implementation("androidx.activity:activity-compose:1.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("com.google.accompanist:accompanist-insets:$accompanist")
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanist")
     implementation("com.google.accompanist:accompanist-swiperefresh:$accompanist")
-    implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation("io.coil-kt:coil-compose:2.3.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines")
 
-    implementation("com.google.dagger:hilt-android:2.43.2")
-    kapt("com.google.dagger:hilt-compiler:2.43.2")
+    implementation("com.google.dagger:hilt-android:2.45")
+    kapt("com.google.dagger:hilt-compiler:2.45")
 
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junit5")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5")
-    testImplementation("io.mockk:mockk:1.12.7")
+    testImplementation("io.mockk:mockk:1.13.3")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines")
-    testImplementation("io.kotest:kotest-assertions-core:5.4.2")
-    testImplementation("app.cash.turbine:turbine:0.12.0")
+    testImplementation("io.kotest:kotest-assertions-core:5.5.5")
+    testImplementation("app.cash.turbine:turbine:0.12.3")
 
 }

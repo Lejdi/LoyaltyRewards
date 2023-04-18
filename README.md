@@ -33,8 +33,6 @@ making sure that the app looks like the provided design and behaves in a user-fr
   be prepared to talk about the solution you chose
 - you can use different libraries, e.g. if you are more familiar with RxJava than coroutines,
   you're encouraged to use them
-- the skeleton contains two versions of views on branches - Compose and Data Binding - choose the 
-  one you're more comfortable with
 - if you want to provide additional info about your solution in the readme, feel free to do so
 
 ### Mock API

@@ -1,7 +1,12 @@
 package com.futuremind.loyaltyrewards.view.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -15,13 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.futuremind.loyaltyrewards.R
 import com.futuremind.loyaltyrewards.view.theme.LocalTypography
-import com.google.accompanist.insets.statusBarsPadding
 
 @Composable
 fun TopBar(
     title: String,
     onBack: () -> Unit
-){
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -47,5 +51,5 @@ fun TopBar(
             textAlign = TextAlign.Center,
             style = LocalTypography.current.HeaderM
         )
-    }    
+    }
 }

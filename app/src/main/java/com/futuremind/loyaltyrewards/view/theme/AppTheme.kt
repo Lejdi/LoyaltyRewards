@@ -1,11 +1,14 @@
 package com.futuremind.loyaltyrewards.view.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.LocalContentColor
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Shapes
+import androidx.compose.material.Typography
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.insets.ProvideWindowInsets
 
 @Composable
 fun AppTheme(content: @Composable () -> Unit) {
@@ -33,9 +36,7 @@ fun AppTheme(content: @Composable () -> Unit) {
                 large = RoundedCornerShape(16.dp)
             )
         ) {
-            ProvideWindowInsets {
-                content()
-            }
+            content()
         }
     }
 }

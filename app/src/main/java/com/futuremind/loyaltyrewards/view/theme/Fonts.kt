@@ -19,18 +19,18 @@ val fonts = FontFamily(
 )
 
 data class AppTypography(
-    val HeaderL : TextStyle = TextStyle(
+    val HeaderL: TextStyle = TextStyle(
         fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp
     ),
-    val HeaderM : TextStyle = TextStyle(
+    val HeaderM: TextStyle = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = 16.sp
     ),
-    val BodyL : TextStyle = TextStyle(
+    val BodyL: TextStyle = TextStyle(
         fontSize = 16.sp
     ),
-    val BodyM : TextStyle = TextStyle(
+    val BodyM: TextStyle = TextStyle(
         fontSize = 12.sp
     )
 )

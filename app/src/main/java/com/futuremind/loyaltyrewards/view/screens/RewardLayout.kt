@@ -3,13 +3,27 @@ package com.futuremind.loyaltyrewards.view.screens
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,10 +43,6 @@ import com.futuremind.loyaltyrewards.view.components.IconButtonSmall
 import com.futuremind.loyaltyrewards.view.components.TopBar
 import com.futuremind.loyaltyrewards.view.theme.LocalColors
 import com.futuremind.loyaltyrewards.view.theme.LocalTypography
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.systemBarsPadding
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 
 @Composable
@@ -46,6 +56,7 @@ fun RewardLayout(viewModel: RewardsViewModel = viewModel()) {
     )
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun RewardLayout(
     points: Int?,
@@ -63,10 +74,12 @@ private fun RewardLayout(
                 title = stringResource(R.string.rewards),
                 onBack = { /* not part of task */ }
             )
-            SwipeRefresh(
-                state = rememberSwipeRefreshState(isLoading),
-                onRefresh = onRefresh,
-            ) {
+            val pullRefreshState = rememberPullRefreshState(
+                refreshing = isLoading,
+                onRefresh = onRefresh
+            )
+
+            Box(modifier = Modifier.pullRefresh(pullRefreshState)) {
                 Column(
                     modifier = Modifier
                         .navigationBarsPadding()
@@ -81,6 +94,11 @@ private fun RewardLayout(
                     Spacer(modifier = Modifier.height(24.dp))
                     ShareCard()
                 }
+                PullRefreshIndicator(
+                    refreshing = isLoading,
+                    state = pullRefreshState,
+                    modifier = Modifier.align(Alignment.TopCenter)
+                )
             }
         }
         SnackbarHost(

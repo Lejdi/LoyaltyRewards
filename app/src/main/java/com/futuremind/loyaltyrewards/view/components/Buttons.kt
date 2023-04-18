@@ -6,7 +6,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +25,7 @@ fun IconButtonSmall(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     contentDescription: String? = null
-){
+) {
     IconButton(
         onClick = onClick,
         modifier = Modifier
@@ -45,13 +48,13 @@ fun ButtonLarge(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
-){
+) {
     Box(
         modifier = Modifier
             .height(40.dp)
             .clip(MaterialTheme.shapes.large)
             .background(LocalColors.current.gradientPrimaryButton)
-            .clickable { onClick() }
+            .clickable(onClick = onClick)
             .then(modifier),
         contentAlignment = Alignment.Center
     ) {
