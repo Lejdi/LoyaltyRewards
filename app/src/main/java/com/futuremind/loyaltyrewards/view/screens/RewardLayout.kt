@@ -16,14 +16,12 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.SnackbarHost
-import androidx.compose.material.SnackbarHostState
-import androidx.compose.material.Text
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
-import androidx.compose.material.pullrefresh.pullRefresh
-import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -56,14 +54,13 @@ fun RewardLayout(viewModel: RewardsViewModel = viewModel()) {
     )
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun RewardLayout(
     points: Int?,
     isLoading: Boolean,
     onRefresh: () -> Unit
 ) {
-
     val errorSnackbarState = remember { SnackbarHostState() }
 
     val scrollState = rememberScrollState()
@@ -74,12 +71,11 @@ private fun RewardLayout(
                 title = stringResource(R.string.rewards),
                 onBack = { /* not part of task */ }
             )
-            val pullRefreshState = rememberPullRefreshState(
-                refreshing = isLoading,
-                onRefresh = onRefresh
-            )
 
-            Box(modifier = Modifier.pullRefresh(pullRefreshState)) {
+            PullToRefreshBox(
+                isRefreshing = isLoading,
+                onRefresh = onRefresh
+            ) {
                 Column(
                     modifier = Modifier
                         .navigationBarsPadding()
@@ -94,11 +90,6 @@ private fun RewardLayout(
                     Spacer(modifier = Modifier.height(24.dp))
                     ShareCard()
                 }
-                PullRefreshIndicator(
-                    refreshing = isLoading,
-                    state = pullRefreshState,
-                    modifier = Modifier.align(Alignment.TopCenter)
-                )
             }
         }
         SnackbarHost(
@@ -139,7 +130,7 @@ fun PointsSection(
     points: Int?
 ) {
 
-    val animatedPoints by animateIntAsState(targetValue = points ?: 0)
+    val animatedPoints by animateIntAsState(targetValue = points ?: 0, label = "animatedPoints")
     val pointsText = when (points) {
         null -> "-"
         else -> animatedPoints.toString()
@@ -156,7 +147,7 @@ fun PointsSection(
                 Text(
                     text = pointsText,
                     style = LocalTypography.current.HeaderL,
-                    color = MaterialTheme.colors.primary
+                    color = MaterialTheme.colorScheme.primary
                 )
                 Spacer(Modifier.width(4.dp))
                 Text(
@@ -164,7 +155,10 @@ fun PointsSection(
                     style = LocalTypography.current.HeaderL
                 )
             }
-            Text(text = stringResource(R.string.redeem_points_subtitle))
+            Text(
+                text = stringResource(R.string.redeem_points_subtitle),
+                style = LocalTypography.current.BodyM
+            )
         }
     }
 }
