@@ -1,4 +1,4 @@
-package com.futuremind.loyaltyrewards.view.theme
+package com.futuremind.loyaltyrewards.presentation.common.theme
 
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.text.TextStyle

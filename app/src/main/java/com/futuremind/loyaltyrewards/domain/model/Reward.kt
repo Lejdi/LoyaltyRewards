@@ -1,4 +1,4 @@
-package com.futuremind.loyaltyrewards.domain
+package com.futuremind.loyaltyrewards.domain.model
 
 data class Reward(
     val id: Int,

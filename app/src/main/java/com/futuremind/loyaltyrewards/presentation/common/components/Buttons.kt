@@ -1,4 +1,4 @@
-package com.futuremind.loyaltyrewards.view.components
+package com.futuremind.loyaltyrewards.presentation.common.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
-import com.futuremind.loyaltyrewards.view.theme.LocalColors
-import com.futuremind.loyaltyrewards.view.theme.LocalTypography
+import com.futuremind.loyaltyrewards.presentation.common.theme.LocalColors
+import com.futuremind.loyaltyrewards.presentation.common.theme.LocalTypography
 
 @Composable
 fun IconButtonSmall(

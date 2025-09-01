@@ -1,4 +1,4 @@
-package com.futuremind.loyaltyrewards.view.components
+package com.futuremind.loyaltyrewards.presentation.common.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.futuremind.loyaltyrewards.R
-import com.futuremind.loyaltyrewards.view.theme.LocalTypography
+import com.futuremind.loyaltyrewards.presentation.common.theme.LocalTypography
 
 @Composable
 fun TopBar(

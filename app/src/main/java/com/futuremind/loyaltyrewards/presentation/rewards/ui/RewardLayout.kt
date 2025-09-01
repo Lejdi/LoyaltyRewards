@@ -1,4 +1,4 @@
-package com.futuremind.loyaltyrewards.view.screens
+package com.futuremind.loyaltyrewards.presentation.rewards.ui
 
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.Image
@@ -16,14 +16,11 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -34,35 +31,36 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.futuremind.loyaltyrewards.R
-import com.futuremind.loyaltyrewards.view.RewardsViewModel
-import com.futuremind.loyaltyrewards.view.components.ButtonLarge
-import com.futuremind.loyaltyrewards.view.components.ColoredCard
-import com.futuremind.loyaltyrewards.view.components.IconButtonSmall
-import com.futuremind.loyaltyrewards.view.components.TopBar
-import com.futuremind.loyaltyrewards.view.theme.LocalColors
-import com.futuremind.loyaltyrewards.view.theme.LocalTypography
-
+import com.futuremind.loyaltyrewards.presentation.common.BaseScreen
+import com.futuremind.loyaltyrewards.presentation.rewards.RewardsViewModel
+import com.futuremind.loyaltyrewards.presentation.common.components.ButtonLarge
+import com.futuremind.loyaltyrewards.presentation.common.components.ColoredCard
+import com.futuremind.loyaltyrewards.presentation.common.components.IconButtonSmall
+import com.futuremind.loyaltyrewards.presentation.common.components.TopBar
+import com.futuremind.loyaltyrewards.presentation.common.theme.LocalColors
+import com.futuremind.loyaltyrewards.presentation.common.theme.LocalTypography
 
 @Composable
-fun RewardLayout(viewModel: RewardsViewModel = viewModel()) {
-    val points by viewModel.loyaltyPointsFlow.collectAsState()
-    val isLoading by viewModel.isLoading.collectAsState()
-    RewardLayout(
-        points = points,
-        isLoading = isLoading,
-        onRefresh = { viewModel.refresh() }
-    )
-}
+fun RewardLayout(
+    viewModel: RewardsViewModel = viewModel()
+) = BaseScreen(
+    displayProgressBar = viewModel.viewState.value.isLoading,
+    errorsQueue = viewModel.viewState.value.errors,
+    onRefresh = {
+        viewModel.refresh()
+    },
+    content = {
+        RewardLayout(
+            points = viewModel.viewState.value.availablePoints,
+        )
+    }
+)
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun RewardLayout(
     points: Int?,
-    isLoading: Boolean,
-    onRefresh: () -> Unit
 ) {
     val errorSnackbarState = remember { SnackbarHostState() }
-
     val scrollState = rememberScrollState()
 
     Box {
@@ -72,24 +70,19 @@ private fun RewardLayout(
                 onBack = { /* not part of task */ }
             )
 
-            PullToRefreshBox(
-                isRefreshing = isLoading,
-                onRefresh = onRefresh
+            Column(
+                modifier = Modifier
+                    .navigationBarsPadding()
+                    .background(LocalColors.current.gradientLight)
+                    .fillMaxSize()
+                    .verticalScroll(scrollState)
             ) {
-                Column(
-                    modifier = Modifier
-                        .navigationBarsPadding()
-                        .background(LocalColors.current.gradientLight)
-                        .fillMaxSize()
-                        .verticalScroll(scrollState)
-                ) {
-                    Spacer(modifier = Modifier.height(24.dp))
-                    GreetingRow("FM Candidate") //not part of task
-                    Spacer(modifier = Modifier.height(24.dp))
-                    PointsSection(points = points)
-                    Spacer(modifier = Modifier.height(24.dp))
-                    ShareCard()
-                }
+                Spacer(modifier = Modifier.height(24.dp))
+                GreetingRow("FM Candidate") //not part of task
+                Spacer(modifier = Modifier.height(24.dp))
+                PointsSection(points = points)
+                Spacer(modifier = Modifier.height(24.dp))
+                ShareCard()
             }
         }
         SnackbarHost(

@@ -1,23 +1,19 @@
-package com.futuremind.loyaltyrewards.data
+package com.futuremind.loyaltyrewards.di
 
 import com.futuremind.loyaltyrewards.api.RewardsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.MainScope
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class SingletonModule {
+class ApiModule {
 
     @Singleton
     @Provides
-    fun provide() = RewardsApi()
+    fun provideRewardsApi() = RewardsApi()
 
-    @Singleton
-    @Provides
-    fun coroutineScope() = MainScope()
 
 }
