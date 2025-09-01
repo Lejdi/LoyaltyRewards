@@ -16,6 +16,14 @@ class RewardsViewModel @Inject constructor(
     }
 
     fun refresh() {
+        getAvailablePoints {
+            getRewards()
+        }
+    }
+
+    private fun getAvailablePoints(
+        onResult: () -> Unit = {},
+    ) {
         setState {
             copy(
                 isLoading = true
@@ -39,6 +47,35 @@ class RewardsViewModel @Inject constructor(
                         availablePoints = points,
                     )
                 }
+                onResult()
+            }
+        )
+    }
+
+    private fun getRewards() {
+        setState {
+            copy(
+                isLoading = true
+            )
+        }
+        useCases.getRewards(
+            params = Unit,
+            scope = viewModelScope,
+            onResult = { result ->
+                val rewards = if (result.isFailure()) {
+                    viewState.value.rewards
+                } else {
+                    result.getResultData()
+                }
+
+                if (result.isFailure()) errorsQueue.addError(result.getErrorType())
+
+                setState {
+                    copy(
+                        isLoading = false,
+                        rewards = rewards,
+                    )
+                }
             }
         )
     }
@@ -57,6 +94,7 @@ class RewardsViewModel @Inject constructor(
             RewardsContract.Event.ActiveRewardClicked -> {
                 //todo
             }
+
             RewardsContract.Event.InactiveRewardClicked -> {
                 //todo
             }

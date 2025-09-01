@@ -2,6 +2,7 @@ package com.futuremind.loyaltyrewards.di
 
 import com.futuremind.loyaltyrewards.data.repository.RewardsRepository
 import com.futuremind.loyaltyrewards.domain.usecases.rewards.GetAvailablePoints
+import com.futuremind.loyaltyrewards.domain.usecases.rewards.GetRewards
 import com.futuremind.loyaltyrewards.domain.usecases.rewards.RewardsUseCases
 import dagger.Module
 import dagger.Provides
@@ -21,12 +22,24 @@ class UseCasesModule {
         return GetAvailablePoints(rewardsRepository)
     }
 
+    @Singleton
+    @Provides
+    fun provideGetRewards(
+        rewardsRepository: RewardsRepository
+    ) : GetRewards {
+        return GetRewards(rewardsRepository)
+    }
+
 
     @Singleton
     @Provides
     fun provideRewardsUseCases(
-        getAvailablePoints: GetAvailablePoints
+        getAvailablePoints: GetAvailablePoints,
+        getRewards: GetRewards
     ) : RewardsUseCases {
-        return RewardsUseCases(getAvailablePoints)
+        return RewardsUseCases(
+            getAvailablePoints = getAvailablePoints,
+            getRewards = getRewards
+        )
     }
 }
