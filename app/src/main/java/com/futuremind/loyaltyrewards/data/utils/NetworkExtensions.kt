@@ -1,5 +1,6 @@
 package com.futuremind.loyaltyrewards.data.utils
 
+import com.futuremind.loyaltyrewards.R
 import com.futuremind.loyaltyrewards.api.MockHttpException
 import com.futuremind.loyaltyrewards.presentation.common.ErrorType
 import java.net.SocketTimeoutException
@@ -21,7 +22,9 @@ fun handleException(e: Exception): ErrorType.DataSourceError {
         is MockHttpException -> {
             val code = e.message?.substring(0, 3)?.toIntOrNull() //cannot access `code` field in class, but is displayed at the beginning of message
             when(code) {
-                in 400 .. 499 -> ErrorType.DataSourceError.Other(e.message?.substring(3) ?: "Request error")
+                in 400 .. 499 -> {
+                    ErrorType.DataSourceError.Other(e.message?.substring(5) ?: R.string.request_error)
+                }
                 in 500 .. 599 -> ErrorType.DataSourceError.ServerError
                 else -> ErrorType.DataSourceError.Unknown
             }

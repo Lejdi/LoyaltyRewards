@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.futuremind.loyaltyrewards.R
 import com.futuremind.loyaltyrewards.presentation.common.theme.Palette
 import com.futuremind.loyaltyrewards.presentation.common.utils.clickableWithoutRipple
 
@@ -54,12 +56,12 @@ fun BaseScreen(
                 containerColor = Color.White,
                 title = {
                     Text(
-                        text = "Error",
+                        text = stringResource(R.string.error),
                     )
                 },
                 text = {
                     Text(
-                        text = error.details,
+                        text = stringResource(error.details, error.detailsArg),
                     )
                 },
                 onDismissRequest = {
@@ -71,7 +73,7 @@ fun BaseScreen(
                             errorsQueue.removeError()
                         },
                     ) {
-                        Text("OK")
+                        Text(stringResource(R.string.ok))
                     }
                 },
             )

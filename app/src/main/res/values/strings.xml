@@ -10,4 +10,13 @@
     <string name="welcome_to_club">Welcome to the club!</string>
     <string name="hi_user">Hi, %s</string>
     <string name="points_cost">%s points</string>
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
+    <string name="no_rewards">No rewards available</string>
+    <string name="other_error_message">%s</string>
+    <string name="request_error">Something went wrong when processing your request. Please try again.</string>
+    <string name="unknown_error">Unknown error occurred. Please try again.</string>
+    <string name="timeout_error">Your request has timed out. Please check your internet connection and try again.</string>
+    <string name="server_error">Server has encountered issues processing your request. Please try again.</string>
+    <string name="unknown_network_error">Unknown network error occurred. Please check your internet connection and try again.</string>
 </resources>
