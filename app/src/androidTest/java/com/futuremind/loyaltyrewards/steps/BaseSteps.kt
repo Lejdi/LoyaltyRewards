@@ -1,7 +1,7 @@
-package com.futuremind.loyalityrewards.steps
+package com.futuremind.loyaltyrewards.steps
 
 import androidx.compose.ui.test.SemanticsNodeInteractionsProvider
-import com.futuremind.loyalityrewards.test.ComposeRuleHolder
+import com.futuremind.loyaltyrewards.test.ComposeRuleHolder
 import dagger.hilt.android.testing.HiltAndroidTest
 import io.cucumber.junit.WithJunitRule
 import org.junit.Rule

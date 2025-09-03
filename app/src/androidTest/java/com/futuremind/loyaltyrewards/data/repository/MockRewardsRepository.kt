@@ -1,15 +1,19 @@
-package com.futuremind.loyalityrewards.data.repository
+package com.futuremind.loyaltyrewards.data.repository
 
 import com.futuremind.loyaltyrewards.api.ApiPoints
 import com.futuremind.loyaltyrewards.api.ApiReward
 import com.futuremind.loyaltyrewards.api.ApiRewardActivationStatus
-import com.futuremind.loyaltyrewards.data.repository.RewardsRepository
 import com.futuremind.loyaltyrewards.data.utils.DataSourceResult
 
 object MockRewardsRepository : RewardsRepository {
     private val rewards = mutableListOf<ApiReward>()
     private val rewardsStatuses = mutableListOf<ApiRewardActivationStatus>()
     private var points: Int = 0
+
+    fun clearMockedRewards() {
+        rewards.clear()
+        rewardsStatuses.clear()
+    }
 
     fun setRewards(
         mockedRewards: List<ApiReward>,

@@ -1,9 +1,9 @@
-package com.futuremind.loyalityrewards.test
+package com.futuremind.loyaltyrewards.test
 
 import io.cucumber.junit.CucumberOptions
 
 @CucumberOptions(
-    glue = [ "com.futuremind.loyalityrewards.steps" ],
+    glue = [ "com.futuremind.loyaltyrewards.steps" ],
     features = [ "features" ]
 )
 class CucumberConfiguration {

@@ -1,4 +1,4 @@
-package com.futuremind.loyalityrewards.test
+package com.futuremind.loyaltyrewards.test
 
 import android.app.Application
 import android.content.Context

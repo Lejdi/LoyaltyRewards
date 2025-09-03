@@ -18,7 +18,7 @@ android {
         versionCode = 1
         versionName = "1.0.0"
 
-        testInstrumentationRunner = "com.futuremind.loyalityrewards.test.LoyaltyRewardsTestInstrumentationRunner"
+        testInstrumentationRunner = "com.futuremind.loyaltyrewards.test.LoyaltyRewardsTestInstrumentationRunner"
     }
 
     compileOptions {

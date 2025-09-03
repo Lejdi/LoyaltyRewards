@@ -1,4 +1,4 @@
-package com.futuremind.loyalityrewards.test
+package com.futuremind.loyaltyrewards.test
 
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import io.cucumber.junit.WithJunitRule
