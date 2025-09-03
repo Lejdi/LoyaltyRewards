@@ -38,6 +38,14 @@ object MockRewardsRepository : RewardsRepository {
                 activatedCount = count
             )
         )
+        val price = rewards.first { it.id == rewardId }.pointsCost
+        if(count == 1) {
+            setPoints(points - price)
+        }
+        if(count == 0){
+            setPoints(points + price)
+        }
+
         return DataSourceResult.Success(Unit)
     }
 

@@ -14,3 +14,41 @@ Feature: Ability to display rewards screen
       | Headphones | placeholder | 1000 | no        | yes       |
       | Camera     | placeholder | 500  | yes       |           |
       | High Five  | placeholder | 2000 | no        | no        |
+
+  Scenario: User activates a reward
+    Given user has "1253" points available
+    And has has available rewards
+      | id | name       | cost | activatedCount |
+      | 0  | Headphones | 1000 | 0              |
+      | 1  | Camera     | 500  | 0              |
+    When user launches the application
+    Then available points section is visible with value of "1253"
+    And rewards section is visible with rewards
+      | name       | image       | cost | activated | available |
+      | Headphones | placeholder | 1000 | no        | yes       |
+      | Camera     | placeholder | 500  | no        | yes       |
+    When user clicks on "Headphones" rewards button
+    Then available points section is visible with value of "253"
+    And rewards section is visible with rewards
+      | name       | image       | cost | activated | available |
+      | Headphones | placeholder | 1000 | yes       |           |
+      | Camera     | placeholder | 500  | no        | no        |
+
+  Scenario: User deactivates a reward
+    Given user has "1253" points available
+    And has has available rewards
+      | id | name       | cost | activatedCount |
+      | 0  | Headphones | 1000 | 0              |
+      | 1  | Camera     | 500  | 1              |
+    When user launches the application
+    Then available points section is visible with value of "1253"
+    And rewards section is visible with rewards
+      | name       | image       | cost | activated | available |
+      | Headphones | placeholder | 1000 | no        | yes       |
+      | Camera     | placeholder | 500  | yes       |           |
+    When user clicks on "Camera" rewards button
+    Then available points section is visible with value of "1753"
+    And rewards section is visible with rewards
+      | name       | image       | cost | activated | available |
+      | Headphones | placeholder | 1000 | no        | yes       |
+      | Camera     | placeholder | 500  | no        | yes       |

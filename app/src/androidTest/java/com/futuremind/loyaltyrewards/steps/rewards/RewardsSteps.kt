@@ -4,9 +4,13 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.filterToOne
 import androidx.compose.ui.test.hasAnyChild
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onSiblings
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
 import androidx.test.core.app.ActivityScenario.launch
 import com.futuremind.loyaltyrewards.MainActivity
@@ -28,6 +32,7 @@ import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
+import io.cucumber.java.PendingException
 
 class RewardsSteps(composeRuleHolder: ComposeRuleHolder) : BaseSteps(composeRuleHolder) {
 
@@ -104,5 +109,12 @@ class RewardsSteps(composeRuleHolder: ComposeRuleHolder) : BaseSteps(composeRule
                     }
                 }
         }
+    }
+
+    @When("user clicks on {string} rewards button")
+    fun userClicksOnRewardsButton(rewardName: String) {
+        onNodeWithText(rewardName)
+            .onSiblings().filterToOne(hasTestTag(RewardsRowRewardButtonTestTags.REWARDS_ROW_REWARD_BUTTON_TAG))
+            .performClick()
     }
 }
