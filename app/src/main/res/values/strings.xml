@@ -9,4 +9,5 @@
     <string name="redeem_points_subtitle">Redeem points for exclusive rewards</string>
     <string name="welcome_to_club">Welcome to the club!</string>
     <string name="hi_user">Hi, %s</string>
+    <string name="points_cost">%s points</string>
 </resources>

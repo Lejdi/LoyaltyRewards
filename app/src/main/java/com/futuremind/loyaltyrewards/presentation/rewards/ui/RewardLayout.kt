@@ -20,10 +20,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.futuremind.loyaltyrewards.R
+import com.futuremind.loyaltyrewards.domain.model.Reward
 import com.futuremind.loyaltyrewards.presentation.common.BaseScreen
 import com.futuremind.loyaltyrewards.presentation.rewards.RewardsViewModel
 import com.futuremind.loyaltyrewards.presentation.common.components.TopBar
 import com.futuremind.loyaltyrewards.presentation.common.theme.LocalColors
+import com.futuremind.loyaltyrewards.presentation.rewards.ui.rewardsrow.RewardsRow
 
 @Composable
 fun RewardLayout(
@@ -37,6 +39,8 @@ fun RewardLayout(
     content = {
         RewardLayout(
             points = viewModel.viewState.value.availablePoints,
+            rewards = viewModel.viewState.value.rewards,
+            isLoading = viewModel.viewState.value.isLoading
         )
     }
 )
@@ -44,6 +48,8 @@ fun RewardLayout(
 @Composable
 private fun RewardLayout(
     points: Int?,
+    rewards: List<Reward>,
+    isLoading: Boolean,
 ) {
     val errorSnackbarState = remember { SnackbarHostState() }
     val scrollState = rememberScrollState()
@@ -66,6 +72,16 @@ private fun RewardLayout(
                 GreetingRow("FM Candidate") //not part of task
                 Spacer(modifier = Modifier.height(24.dp))
                 PointsSection(points = points)
+                if(!isLoading){
+                    Spacer(modifier = Modifier.height(24.dp))
+                    RewardsRow(
+                        rewards = rewards,
+                        onItemClick = {
+                            println("clicked: $it")
+                        },
+                        availablePoints = points
+                    )
+                }
                 Spacer(modifier = Modifier.height(24.dp))
                 ShareCard()
             }

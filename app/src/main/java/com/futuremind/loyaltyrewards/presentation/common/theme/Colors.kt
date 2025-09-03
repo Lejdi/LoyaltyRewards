@@ -29,6 +29,8 @@ object Palette {
     val alabaster = Color(0xFFF4F5F9)
     val pink = Color(0xFFEB456C)
     val peach = Color(0xFFF56C72)
+    val iron = Color(0xFF787878)
+    val gray = Color(0xFF8D8D8D)
 }
 
 val LocalColors = staticCompositionLocalOf { AppColors }

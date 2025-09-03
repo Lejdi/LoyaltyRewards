@@ -27,7 +27,11 @@ fun AppTheme(content: @Composable () -> Unit) {
                 surface = Palette.alabaster,
                 onBackground = Palette.black,
                 onPrimary = Palette.white,
-                onSecondary = Palette.white
+                onSecondary = Palette.white,
+                onSurface = Palette.black,
+                onSurfaceVariant = Palette.iron,
+                tertiary = Palette.gray,
+                onTertiary = Palette.white,
             ),
             typography = Typography(
                 displayLarge = defaultTypography.displayLarge.copy(fontFamily = fonts),
