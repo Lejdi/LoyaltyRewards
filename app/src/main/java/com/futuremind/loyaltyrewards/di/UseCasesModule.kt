@@ -1,6 +1,8 @@
 package com.futuremind.loyaltyrewards.di
 
 import com.futuremind.loyaltyrewards.data.repository.RewardsRepository
+import com.futuremind.loyaltyrewards.domain.usecases.rewards.ActivateReward
+import com.futuremind.loyaltyrewards.domain.usecases.rewards.DeactivateReward
 import com.futuremind.loyaltyrewards.domain.usecases.rewards.GetAvailablePoints
 import com.futuremind.loyaltyrewards.domain.usecases.rewards.GetRewards
 import com.futuremind.loyaltyrewards.domain.usecases.rewards.RewardsUseCases
@@ -30,16 +32,36 @@ class UseCasesModule {
         return GetRewards(rewardsRepository)
     }
 
+    @Singleton
+    @Provides
+    fun provideDeactivateReward(
+        rewardsRepository: RewardsRepository
+    ) : DeactivateReward {
+        return DeactivateReward(rewardsRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideActivateReward(
+        rewardsRepository: RewardsRepository
+    ) : ActivateReward {
+        return ActivateReward(rewardsRepository)
+    }
+
 
     @Singleton
     @Provides
     fun provideRewardsUseCases(
         getAvailablePoints: GetAvailablePoints,
-        getRewards: GetRewards
+        getRewards: GetRewards,
+        deactivateReward: DeactivateReward,
+        activateReward: ActivateReward,
     ) : RewardsUseCases {
         return RewardsUseCases(
             getAvailablePoints = getAvailablePoints,
-            getRewards = getRewards
+            getRewards = getRewards,
+            deactivateReward = deactivateReward,
+            activateReward = activateReward
         )
     }
 }

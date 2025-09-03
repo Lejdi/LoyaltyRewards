@@ -25,6 +25,7 @@ import com.futuremind.loyaltyrewards.presentation.common.BaseScreen
 import com.futuremind.loyaltyrewards.presentation.rewards.RewardsViewModel
 import com.futuremind.loyaltyrewards.presentation.common.components.TopBar
 import com.futuremind.loyaltyrewards.presentation.common.theme.LocalColors
+import com.futuremind.loyaltyrewards.presentation.rewards.RewardsContract
 import com.futuremind.loyaltyrewards.presentation.rewards.ui.rewardsrow.RewardsRow
 
 @Composable
@@ -40,7 +41,14 @@ fun RewardLayout(
         RewardLayout(
             points = viewModel.viewState.value.availablePoints,
             rewards = viewModel.viewState.value.rewards,
-            isLoading = viewModel.viewState.value.isLoading
+            onRewardClick = {
+                if(it.activated) {
+                    viewModel.sendEvent(RewardsContract.Event.ActiveRewardClicked(it.id))
+                }
+                else {
+                    viewModel.sendEvent(RewardsContract.Event.InactiveRewardClicked(it.id))
+                }
+            }
         )
     }
 )
@@ -49,7 +57,7 @@ fun RewardLayout(
 private fun RewardLayout(
     points: Int?,
     rewards: List<Reward>,
-    isLoading: Boolean,
+    onRewardClick: (Reward) -> Unit,
 ) {
     val errorSnackbarState = remember { SnackbarHostState() }
     val scrollState = rememberScrollState()
@@ -72,16 +80,12 @@ private fun RewardLayout(
                 GreetingRow("FM Candidate") //not part of task
                 Spacer(modifier = Modifier.height(24.dp))
                 PointsSection(points = points)
-                if(!isLoading){
-                    Spacer(modifier = Modifier.height(24.dp))
-                    RewardsRow(
-                        rewards = rewards,
-                        onItemClick = {
-                            println("clicked: $it")
-                        },
-                        availablePoints = points
-                    )
-                }
+                Spacer(modifier = Modifier.height(24.dp))
+                RewardsRow(
+                    rewards = rewards,
+                    onItemClick = onRewardClick,
+                    availablePoints = points
+                )
                 Spacer(modifier = Modifier.height(24.dp))
                 ShareCard()
             }

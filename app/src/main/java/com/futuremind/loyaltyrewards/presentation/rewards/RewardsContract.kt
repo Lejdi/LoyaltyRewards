@@ -9,8 +9,8 @@ import com.futuremind.loyaltyrewards.presentation.common.ViewState
 class RewardsContract {
 
     sealed interface Event : ViewEvent {
-        data object InactiveRewardClicked : Event
-        data object ActiveRewardClicked : Event
+        data class InactiveRewardClicked(val rewardId: Int) : Event
+        data class ActiveRewardClicked(val rewardId: Int) : Event
     }
 
     data class State(

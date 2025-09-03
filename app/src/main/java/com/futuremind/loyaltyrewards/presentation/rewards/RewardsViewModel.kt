@@ -91,12 +91,44 @@ class RewardsViewModel @Inject constructor(
 
     override fun sendEvent(event: RewardsContract.Event) {
         when (event) {
-            RewardsContract.Event.ActiveRewardClicked -> {
-                //todo
+            is RewardsContract.Event.ActiveRewardClicked -> {
+                useCases.deactivateReward(
+                    params = event.rewardId,
+                    scope = viewModelScope,
+                    onResult = { result ->
+                        if (result.isFailure()){
+                            errorsQueue.addError(result.getErrorType())
+                            setState {
+                                copy(
+                                    isLoading = false,
+                                )
+                            }
+                        }
+                        else {
+                            refresh()
+                        }
+                    }
+                )
             }
 
-            RewardsContract.Event.InactiveRewardClicked -> {
-                //todo
+            is RewardsContract.Event.InactiveRewardClicked -> {
+                useCases.activateReward(
+                    params = event.rewardId,
+                    scope = viewModelScope,
+                    onResult = { result ->
+                        if (result.isFailure()){
+                            errorsQueue.addError(result.getErrorType())
+                            setState {
+                                copy(
+                                    isLoading = false,
+                                )
+                            }
+                        }
+                        else {
+                            refresh()
+                        }
+                    }
+                )
             }
         }
     }
