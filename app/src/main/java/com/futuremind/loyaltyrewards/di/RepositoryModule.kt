@@ -1,6 +1,7 @@
 package com.futuremind.loyaltyrewards.di
 
 import com.futuremind.loyaltyrewards.api.RewardsApi
+import com.futuremind.loyaltyrewards.data.repository.ApiRewardsRepository
 import com.futuremind.loyaltyrewards.data.repository.RewardsRepository
 import dagger.Module
 import dagger.Provides
@@ -17,6 +18,6 @@ class RepositoryModule {
     fun provideRewardsRepository(
         api: RewardsApi
     ) : RewardsRepository {
-        return RewardsRepository(api)
+        return ApiRewardsRepository(api)
     }
 }

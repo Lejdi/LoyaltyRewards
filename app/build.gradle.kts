@@ -17,6 +17,8 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
+
+        testInstrumentationRunner = "com.futuremind.loyalityrewards.test.LoyaltyRewardsTestInstrumentationRunner"
     }
 
     compileOptions {
@@ -53,10 +55,13 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    testImplementation(libs.junit.jupiter.api)
-    testImplementation(libs.junit.jupiter.engine)
-    testImplementation(libs.mockk)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.kotest.assertions.core)
-    testImplementation(libs.turbine)
+    androidTestImplementation(libs.cucumber.android)
+    androidTestImplementation(libs.androidx.hilt.testing)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+
 }

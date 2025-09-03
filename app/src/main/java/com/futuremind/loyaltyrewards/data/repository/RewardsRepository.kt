@@ -1,27 +1,16 @@
 package com.futuremind.loyaltyrewards.data.repository
 
-import com.futuremind.loyaltyrewards.api.RewardsApi
-import com.futuremind.loyaltyrewards.data.utils.handleNetworkResponse
+import com.futuremind.loyaltyrewards.api.ApiPoints
+import com.futuremind.loyaltyrewards.api.ApiReward
+import com.futuremind.loyaltyrewards.api.ApiRewardActivationStatus
+import com.futuremind.loyaltyrewards.data.utils.DataSourceResult
 
-class RewardsRepository(
-    val api: RewardsApi
-) {
-    suspend fun getAvailablePoints() = handleNetworkResponse {
-        api.getPoints()
-    }
+interface RewardsRepository {
+    suspend fun getAvailablePoints(): DataSourceResult<ApiPoints>
 
-    suspend fun getRewardsList() = handleNetworkResponse {
-        api.getRewards()
-    }
+    suspend fun getRewardsList(): DataSourceResult<List<ApiReward>>
 
-    suspend fun getRewardsActivationList() = handleNetworkResponse {
-        api.getRewardsActivationStatus()
-    }
+    suspend fun getRewardsActivationList(): DataSourceResult<List<ApiRewardActivationStatus>>
 
-    suspend fun changeRewardStatus(rewardId: Int, count: Int) = handleNetworkResponse {
-        api.changeRewardActivationStatus(
-            rewardId = rewardId,
-            activationsCount = count,
-        )
-    }
+    suspend fun changeRewardStatus(rewardId: Int, count: Int): DataSourceResult<Unit>
 }
