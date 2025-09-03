@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.futuremind.loyaltyrewards.R
@@ -27,7 +28,9 @@ fun RewardsRow(
     if (rewards.isNotEmpty()) {
         LazyRow(
             contentPadding = PaddingValues(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier
+                .testTag(RewardsRowTestTags.REWARDS_ROW_TAG)
         ) {
             items(rewards) {
                 RewardCard(
@@ -41,7 +44,8 @@ fun RewardsRow(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp),
+                .height(100.dp)
+                .testTag(RewardsRowTestTags.REWARDS_ROW_EMPTY_LIST_TAG),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -52,4 +56,10 @@ fun RewardsRow(
             )
         }
     }
+}
+
+
+object RewardsRowTestTags {
+    const val REWARDS_ROW_TAG = "Rewards.RewardsRow"
+    const val REWARDS_ROW_EMPTY_LIST_TAG = "Rewards.RewardsRow.EmptyList"
 }

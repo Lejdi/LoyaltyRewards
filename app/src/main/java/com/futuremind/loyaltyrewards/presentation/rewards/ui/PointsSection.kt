@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -41,7 +42,9 @@ fun PointsSection(
                 Text(
                     text = pointsText,
                     style = LocalTypography.current.HeaderL,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .testTag(PointsSectionTestTags.REWARDS_POINTS_SECTION_VALUE_TAG)
                 )
                 Spacer(Modifier.width(4.dp))
                 Text(
@@ -55,4 +58,8 @@ fun PointsSection(
             )
         }
     }
+}
+
+object PointsSectionTestTags {
+    const val REWARDS_POINTS_SECTION_VALUE_TAG = "Rewards.PointsSection.Value"
 }

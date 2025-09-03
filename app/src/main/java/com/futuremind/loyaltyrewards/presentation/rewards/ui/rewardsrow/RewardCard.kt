@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
@@ -33,7 +34,8 @@ fun RewardCard(
             .background(
                 color = MaterialTheme.colorScheme.surface,
                 shape = MaterialTheme.shapes.small
-            ),
+            )
+            .testTag(RewardsRowRewardCardTestTags.REWARDS_ROW_REWARD_CARD_TAG),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val imageBlur = if (available) 0.dp else 4.dp
@@ -71,7 +73,8 @@ fun RewardCard(
 private fun ImagePlaceholder() {
     Column(
         modifier = Modifier
-            .size(200.dp),
+            .size(200.dp)
+            .testTag(RewardsRowRewardCardTestTags.REWARDS_ROW_REWARD_CARD_PLACEHOLDER_TAG),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -80,4 +83,9 @@ private fun ImagePlaceholder() {
             contentDescription = null,
         )
     }
+}
+
+object RewardsRowRewardCardTestTags {
+    const val REWARDS_ROW_REWARD_CARD_TAG = "Rewards.RewardsRow.Reward.Card"
+    const val REWARDS_ROW_REWARD_CARD_PLACEHOLDER_TAG = "Rewards.RewardsRow.Reward.Card.Placeholder"
 }
