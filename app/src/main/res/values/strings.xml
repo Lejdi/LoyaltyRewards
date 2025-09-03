@@ -19,4 +19,7 @@
     <string name="timeout_error">Your request has timed out. Please check your internet connection and try again.</string>
     <string name="server_error">Server has encountered issues processing your request. Please try again.</string>
     <string name="unknown_network_error">Unknown network error occurred. Please check your internet connection and try again.</string>
+    <string name="reward_button_activated">Button Activated</string>
+    <string name="reward_button_available">Button Available</string>
+    <string name="reward_button_not_available">Button Not Available</string>
 </resources>

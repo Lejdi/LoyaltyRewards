@@ -1,4 +1,4 @@
-package com.futuremind.loyaltyrewards.data.repository
+package com.futuremind.loyaltyrewards.data.repository.rewards
 
 import com.futuremind.loyaltyrewards.api.RewardsApi
 import com.futuremind.loyaltyrewards.data.utils.handleNetworkResponse

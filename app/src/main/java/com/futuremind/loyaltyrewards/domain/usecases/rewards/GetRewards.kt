@@ -2,7 +2,7 @@ package com.futuremind.loyaltyrewards.domain.usecases.rewards
 
 import com.futuremind.loyaltyrewards.api.ApiReward
 import com.futuremind.loyaltyrewards.api.ApiRewardActivationStatus
-import com.futuremind.loyaltyrewards.data.repository.RewardsRepository
+import com.futuremind.loyaltyrewards.data.repository.rewards.RewardsRepository
 import com.futuremind.loyaltyrewards.data.utils.DataSourceResult
 import com.futuremind.loyaltyrewards.domain.model.Reward
 import com.futuremind.loyaltyrewards.domain.usecases.UseCase

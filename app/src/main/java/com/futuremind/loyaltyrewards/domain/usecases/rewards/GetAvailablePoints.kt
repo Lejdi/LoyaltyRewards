@@ -1,6 +1,6 @@
 package com.futuremind.loyaltyrewards.domain.usecases.rewards
 
-import com.futuremind.loyaltyrewards.data.repository.RewardsRepository
+import com.futuremind.loyaltyrewards.data.repository.rewards.RewardsRepository
 import com.futuremind.loyaltyrewards.data.utils.DataSourceResult
 import com.futuremind.loyaltyrewards.domain.usecases.UseCase
 import com.futuremind.loyaltyrewards.domain.usecases.UseCaseResult

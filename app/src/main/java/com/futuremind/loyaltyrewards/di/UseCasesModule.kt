@@ -1,6 +1,6 @@
 package com.futuremind.loyaltyrewards.di
 
-import com.futuremind.loyaltyrewards.data.repository.RewardsRepository
+import com.futuremind.loyaltyrewards.data.repository.rewards.RewardsRepository
 import com.futuremind.loyaltyrewards.domain.usecases.rewards.ActivateReward
 import com.futuremind.loyaltyrewards.domain.usecases.rewards.DeactivateReward
 import com.futuremind.loyaltyrewards.domain.usecases.rewards.GetAvailablePoints

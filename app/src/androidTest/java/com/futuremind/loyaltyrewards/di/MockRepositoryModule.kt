@@ -1,7 +1,7 @@
 package com.futuremind.loyaltyrewards.di
 
 import com.futuremind.loyaltyrewards.data.repository.MockRewardsRepository
-import com.futuremind.loyaltyrewards.data.repository.RewardsRepository
+import com.futuremind.loyaltyrewards.data.repository.rewards.RewardsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent

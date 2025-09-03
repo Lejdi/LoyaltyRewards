@@ -22,11 +22,12 @@ fun Modifier.painterResource(@DrawableRes id: Int): Modifier {
 @Composable
 fun ResourceIcon(
     @DrawableRes id: Int,
+    contentDescription: String?,
     modifier: Modifier = Modifier,
 ){
     Image(
         painter = painterResource(id),
-        contentDescription = null,
+        contentDescription = contentDescription,
         modifier = modifier
             .painterResource(id),
     )

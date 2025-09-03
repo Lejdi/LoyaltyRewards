@@ -1,8 +1,8 @@
 package com.futuremind.loyaltyrewards.di
 
 import com.futuremind.loyaltyrewards.api.RewardsApi
-import com.futuremind.loyaltyrewards.data.repository.ApiRewardsRepository
-import com.futuremind.loyaltyrewards.data.repository.RewardsRepository
+import com.futuremind.loyaltyrewards.data.repository.rewards.ApiRewardsRepository
+import com.futuremind.loyaltyrewards.data.repository.rewards.RewardsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

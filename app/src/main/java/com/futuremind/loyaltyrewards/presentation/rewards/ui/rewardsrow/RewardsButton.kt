@@ -29,11 +29,21 @@ fun RewardButton(
     onClick: (Reward) -> Unit,
     available: Boolean,
 ) {
-    val activated = reward.activated
+    val buttonMode = if (reward.activated) RewardsButtonMode.ACTIVATED
+    else if (!available) RewardsButtonMode.NOT_AVAILABLE
+    else RewardsButtonMode.AVAILABLE
 
-    val icon = if (activated) R.drawable.ic_check
-    else if (!available) R.drawable.ic_lock else
-        R.drawable.ic_unlock
+    val icon = when (buttonMode) {
+        RewardsButtonMode.ACTIVATED -> R.drawable.ic_check
+        RewardsButtonMode.AVAILABLE -> R.drawable.ic_unlock
+        RewardsButtonMode.NOT_AVAILABLE -> R.drawable.ic_lock
+    }
+
+    val description = when (buttonMode) {
+        RewardsButtonMode.ACTIVATED -> R.string.reward_button_activated
+        RewardsButtonMode.AVAILABLE -> R.string.reward_button_available
+        RewardsButtonMode.NOT_AVAILABLE -> R.string.reward_button_not_available
+    }
 
     val backgroundColor = if (!available) MaterialTheme.colorScheme.tertiary else
         MaterialTheme.colorScheme.secondary
@@ -41,22 +51,26 @@ fun RewardButton(
         modifier = Modifier
             .height(32.dp)
             .then(
-                if (activated) {
-                    Modifier
-                        .background(
-                            brush = LocalColors.current.gradientPrimaryButton,
+                when (buttonMode) {
+                    RewardsButtonMode.ACTIVATED -> {
+                        Modifier
+                            .background(
+                                brush = LocalColors.current.gradientPrimaryButton,
+                                shape = MaterialTheme.shapes.large
+                            )
+                    }
+
+                    else -> {
+                        Modifier.background(
+                            color = backgroundColor,
                             shape = MaterialTheme.shapes.large
                         )
-                } else {
-                    Modifier.background(
-                        color = backgroundColor,
-                        shape = MaterialTheme.shapes.large
-                    )
+                    }
                 }
             )
             .clip(MaterialTheme.shapes.large)
             .clickable(
-                enabled = activated || available,
+                enabled = buttonMode != RewardsButtonMode.NOT_AVAILABLE,
             ) {
                 onClick(reward)
             }
@@ -66,6 +80,7 @@ fun RewardButton(
     ) {
         ResourceIcon(
             id = icon,
+            contentDescription = stringResource(description),
             modifier = Modifier
                 .size(14.dp)
                 .testTag(RewardsRowRewardButtonTestTags.REWARDS_ROW_REWARD_BUTTON_ICON_TAG),
@@ -84,6 +99,12 @@ fun RewardButton(
             color = MaterialTheme.colorScheme.onPrimary,
         )
     }
+}
+
+enum class RewardsButtonMode {
+    ACTIVATED,
+    AVAILABLE,
+    NOT_AVAILABLE
 }
 
 object RewardsRowRewardButtonTestTags {

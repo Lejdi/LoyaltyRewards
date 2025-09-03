@@ -2,18 +2,10 @@ package com.futuremind.loyaltyrewards.steps.rewards
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
-import androidx.compose.ui.test.filterToOne
-import androidx.compose.ui.test.hasAnyChild
-import androidx.compose.ui.test.hasTestTag
-import androidx.compose.ui.test.hasText
-import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onSiblings
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
-import androidx.test.core.app.ActivityScenario.launch
-import com.futuremind.loyaltyrewards.MainActivity
 import com.futuremind.loyaltyrewards.R
 import com.futuremind.loyaltyrewards.api.ApiReward
 import com.futuremind.loyaltyrewards.api.ApiRewardActivationStatus
@@ -27,6 +19,8 @@ import com.futuremind.loyaltyrewards.steps.BaseSteps
 import com.futuremind.loyaltyrewards.test.ComposeRuleHolder
 import com.futuremind.loyaltyrewards.test.checkImage
 import com.futuremind.loyaltyrewards.test.onChildWithTag
+import com.futuremind.loyaltyrewards.test.onChildWithText
+import com.futuremind.loyaltyrewards.test.onSiblingWithTag
 import io.cucumber.datatable.DataTable
 import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
@@ -63,11 +57,6 @@ class RewardsSteps(composeRuleHolder: ComposeRuleHolder) : BaseSteps(composeRule
         )
     }
 
-    @When("user launches the application")
-    fun userLaunchesTheApplication() {
-        launch(MainActivity::class.java)
-    }
-
     @Then("available points section is visible with value of {string}")
     fun availablePointsSectionIsVisibleWithValueOf(value: String) {
         onNodeWithTag(PointsSectionTestTags.REWARDS_POINTS_SECTION_VALUE_TAG)
@@ -85,7 +74,7 @@ class RewardsSteps(composeRuleHolder: ComposeRuleHolder) : BaseSteps(composeRule
             val available = entries["available"] == "yes"
 
             onNodeWithTag(RewardsRowTestTags.REWARDS_ROW_TAG, true) //rewards row
-                .onChildren().filterToOne(hasAnyChild(hasText(name))).apply { //rewards card
+                .onChildWithText(name).apply { //rewards card
                     if (image == "placeholder") {
                         onChildWithTag(RewardsRowRewardCardTestTags.REWARDS_ROW_REWARD_CARD_PLACEHOLDER_TAG) //placeholder
                             .assertIsDisplayed()
@@ -113,7 +102,7 @@ class RewardsSteps(composeRuleHolder: ComposeRuleHolder) : BaseSteps(composeRule
     @When("user clicks on {string} rewards button")
     fun userClicksOnRewardsButton(rewardName: String) {
         onNodeWithText(rewardName)
-            .onSiblings().filterToOne(hasTestTag(RewardsRowRewardButtonTestTags.REWARDS_ROW_REWARD_BUTTON_TAG))
+            .onSiblingWithTag(RewardsRowRewardButtonTestTags.REWARDS_ROW_REWARD_BUTTON_TAG)
             .performClick()
     }
 }

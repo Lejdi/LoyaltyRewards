@@ -7,8 +7,11 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.SemanticsNodeInteractionCollection
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.filterToOne
+import androidx.compose.ui.test.hasAnyChild
 import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.onChildren
+import androidx.compose.ui.test.onSiblings
 import com.futuremind.loyaltyrewards.presentation.common.components.ImageResourceId
 
 fun SemanticsNodeInteraction.checkImage(@DrawableRes iconId: Int) =
@@ -23,6 +26,16 @@ fun hasImage(@DrawableRes imageResourceId: Int) = SemanticsMatcher("image resour
 
 fun SemanticsNodeInteractionCollection.singleWithTag(tag: String) = filterToOne(hasTestTag(tag))
 
+fun SemanticsNodeInteractionCollection.singleWithText(text: String) = filterToOne(hasAnyChild(hasText(text)))
+
 fun SemanticsNodeInteraction.onChildWithTag(testTag: String): SemanticsNodeInteraction {
     return onChildren().singleWithTag(testTag)
+}
+
+fun SemanticsNodeInteraction.onChildWithText(text: String): SemanticsNodeInteraction {
+    return onChildren().singleWithText(text)
+}
+
+fun SemanticsNodeInteraction.onSiblingWithTag(testTag: String): SemanticsNodeInteraction {
+    return onSiblings().singleWithTag(testTag)
 }

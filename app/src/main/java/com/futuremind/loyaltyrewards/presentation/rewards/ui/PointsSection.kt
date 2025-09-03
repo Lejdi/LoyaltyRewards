@@ -24,7 +24,6 @@ import com.futuremind.loyaltyrewards.presentation.common.theme.LocalTypography
 fun PointsSection(
     points: Int?
 ) {
-
     val animatedPoints by animateIntAsState(targetValue = points ?: 0, label = "animatedPoints")
     val pointsText = when (points) {
         null -> "-"

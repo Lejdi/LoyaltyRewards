@@ -3,6 +3,7 @@ package com.futuremind.loyaltyrewards.data.repository
 import com.futuremind.loyaltyrewards.api.ApiPoints
 import com.futuremind.loyaltyrewards.api.ApiReward
 import com.futuremind.loyaltyrewards.api.ApiRewardActivationStatus
+import com.futuremind.loyaltyrewards.data.repository.rewards.RewardsRepository
 import com.futuremind.loyaltyrewards.data.utils.DataSourceResult
 
 object MockRewardsRepository : RewardsRepository {
