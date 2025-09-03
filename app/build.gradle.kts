@@ -3,18 +3,17 @@ plugins {
     alias(libs.plugins.kotlin.gradlePlugin)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.android.junit5)
     alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace = "com.futuremind.loyaltyrewards"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.futuremind.loyaltyrewards"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0.0"
 
@@ -42,7 +41,6 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
 
@@ -55,10 +53,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.cucumber.android)
     androidTestImplementation(libs.cucumber.android.hilt)
     androidTestImplementation(libs.androidx.hilt.testing)
