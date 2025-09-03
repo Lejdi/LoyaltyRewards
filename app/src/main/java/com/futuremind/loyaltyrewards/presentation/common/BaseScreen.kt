@@ -6,15 +6,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.futuremind.loyaltyrewards.R
+import com.futuremind.loyaltyrewards.presentation.common.theme.LocalTypography
 import com.futuremind.loyaltyrewards.presentation.common.theme.Palette
 import com.futuremind.loyaltyrewards.presentation.common.utils.clickableWithoutRipple
 
@@ -33,7 +34,7 @@ fun BaseScreen(
         PullToRefreshBox(
             isRefreshing = displayProgressBar,
             onRefresh = onRefresh
-        ){
+        ) {
             content()
         }
         if (displayProgressBar) {
@@ -53,15 +54,17 @@ fun BaseScreen(
         }
         errorsQueue.getError()?.let { error ->
             AlertDialog(
-                containerColor = Color.White,
+                containerColor = MaterialTheme.colorScheme.surface,
                 title = {
                     Text(
                         text = stringResource(R.string.error),
+                        style = LocalTypography.current.HeaderL,
                     )
                 },
                 text = {
                     Text(
                         text = stringResource(error.details, error.detailsArg),
+                        style = LocalTypography.current.BodyL,
                     )
                 },
                 onDismissRequest = {
@@ -73,7 +76,10 @@ fun BaseScreen(
                             errorsQueue.removeError()
                         },
                     ) {
-                        Text(stringResource(R.string.ok))
+                        Text(
+                            text = stringResource(R.string.ok),
+                            style = LocalTypography.current.BodyL,
+                        )
                     }
                 },
             )
