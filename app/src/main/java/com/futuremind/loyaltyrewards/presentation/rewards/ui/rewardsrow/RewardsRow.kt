@@ -36,7 +36,7 @@ fun RewardsRow(
                 RewardCard(
                     reward = it,
                     onClick = onItemClick,
-                    available = it.pointsCost < (availablePoints ?: 0)
+                    available = it.pointsCost < (availablePoints ?: 0) || it.activated
                 )
             }
         }
