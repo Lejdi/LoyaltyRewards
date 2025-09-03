@@ -34,7 +34,7 @@ class RewardsViewModel @Inject constructor(
             scope = viewModelScope,
             onResult = { result ->
                 val points = if (result.isFailure()) {
-                    viewState.value.availablePoints
+                    null
                 } else {
                     result.getResultData()
                 }
@@ -63,7 +63,7 @@ class RewardsViewModel @Inject constructor(
             scope = viewModelScope,
             onResult = { result ->
                 val rewards = if (result.isFailure()) {
-                    viewState.value.rewards
+                    emptyList()
                 } else {
                     result.getResultData()
                 }
