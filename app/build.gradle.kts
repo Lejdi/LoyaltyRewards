@@ -60,6 +60,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.cucumber.android)
+    androidTestImplementation(libs.cucumber.android.hilt)
     androidTestImplementation(libs.androidx.hilt.testing)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
